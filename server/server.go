@@ -57,8 +57,6 @@ Raft 集群通过选举保障 Leader 高可用，Leader 节点故障时自动切
 Raft 日志同步保障消息不丢失、不重复；
 主从同步（Fetch）确保 Follower 与 Leader 数据一致，Leader 故障后可快速切换。
 七、辅助功能
-配置加载
-IntiBroker（未启用）：从 Zookeeper 加载历史配置，恢复 Topic/Partition 元数据。
 日志与监控
 集成日志模块（logger），输出不同级别日志（错误、调试、普通），便于问题排查。
 文件系统管理
@@ -121,12 +119,6 @@ type Message struct {
 	Msg        []byte `json:"msg"`
 }
 
-// type Msg struct {
-// 	producer string
-// 	topic    string
-// 	key      string
-// 	msg      []byte
-// }
 
 type info struct {
 	// name       string //broker name
@@ -162,13 +154,6 @@ type info struct {
 	// BlockName string
 }
 
-// type startget struct {
-// 	cli_name   string
-// 	topic_name string
-// 	part_name  string
-// 	index      int64
-// 	option     int8
-// }
 
 func NewServer(zkinfo zookeeper.ZkInfo) *Server {
 	return &Server{
